@@ -1,0 +1,16 @@
+import numpy as np
+from scipy.sparse.linalg import svds
+
+# Load user-item rating matrix
+ratings = np.array([[1, 2, 0, 0],
+                    [3, 4, 0, 0],
+                    [0, 0, 5, 6],
+                    [0, 0, 7, 8]])
+
+# Perform singular value decomposition
+U, sigma, Vt = svds(ratings, k=2)
+
+# Reconstruct the ratings matrix
+reconstructed_ratings = np.dot(np.dot(U, np.diag(sigma)), Vt)
+
+print("Reconstructed ratings:", reconstructed_ratings)
